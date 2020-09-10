@@ -59,11 +59,7 @@ public class UpdateProfiles {
 			        <name>CustomObject</name>
 			    </types>
 			    <types>
-			        <members>FI Contract Manager.profile</members>
-			        <members>FI Marketing User.profile</members>
-			        <members>FI Standard User -Lightning.profile</members>
-			        <members>FI Standard User.profile</members>
-			        <members>FI System Administrator.profile</members>
+			        <members>*</members>
 			        <name>Profile</name>
 			    </types>
 			    <version>48.0</version>
