@@ -25,31 +25,30 @@
 public class UpdateProfiles {
 
 	/*
-	 * This class updates a list of Salesforce profiles: remove or grant access to certain fields.
-	 * The class updates all xml files in the folder. it sets false/true for the list of provided fields
-
+	 * This class updates a list of Salesforce profiles: removes or grants access to certain fields.
+	 * The class updates all xml files in the folder. It sets false/true for the list of provided fields
 
 	<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
 	    <custom>true</custom>
 	    <fieldPermissions>
-	        <editable>false</editable>              <---- HERE
+	        <editable>false</editable>              <---- This element is updated
 	        <field>Account.ARR_Tier__c</field>
-	        <readable>false</readable>              <---- HERE
+	        <readable>false</readable>              <---- This element is updated
 	    </fieldPermissions>
 	    <fieldPermissions>
-	        <editable>false</editable>              <---- HERE
+	        <editable>false</editable>              <---- This element is updated
 	        <field>Account.AUDDIS_Ref__c</field>
-	        <readable>false</readable>              <---- HERE
+	        <readable>false</readable>              <---- This element is updated
 	    </fieldPermissions>
 	    <fieldPermissions>
-	        <editable>false</editable>              <---- HERE
+	        <editable>false</editable>              <---- This element is updated
 	        <field>Account.AccountID18__c</field>
-	        <readable>false</readable>              <---- HERE
+	        <readable>false</readable>              <---- This element is updated
 	    </fieldPermissions>
 
 
 	 * How to use it 
-	 *  1. Download profiles, example package.xml
+	 *  1. Download profiles. Here is an example package.xml (remember to add CustomObject section so that fields are included in the profile files. Yes, custom objects also can be added to CustomObjects):
 	 *  
 			<?xml version="1.0" encoding="UTF-8"?>
 			<Package xmlns="http://soap.sforce.com/2006/04/metadata">
@@ -65,9 +64,9 @@ public class UpdateProfiles {
 			    <version>48.0</version>
 			</Package>
 
-	    2. FieldsToDisable, valueForEditable, and so on
-	    3. run this class 
-        4. upload the updated profiles
+	    2. Set 4 entry parameters see FieldsToDisable, valueForEditable, and so on below
+	    3. Run this class 
+        4. Upload the updated profiles. Package.xml does not need the CustomObject section:
 	  
 			<?xml version="1.0" encoding="UTF-8"?>
 			<Package xmlns="http://soap.sforce.com/2006/04/metadata">
