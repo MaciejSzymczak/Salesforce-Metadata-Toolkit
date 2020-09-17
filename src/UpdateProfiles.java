@@ -64,7 +64,7 @@ public class UpdateProfiles {
 			    <version>48.0</version>
 			</Package>
 
-	    2. Set 4 entry parameters see FieldsToDisable, valueForEditable, and so on below
+	    2. Set 4 entry parameters see fieldsforUpdate, valueForEditable, and so on below
 	    3. Run this class 
         4. Upload the updated profiles. Package.xml does not need the CustomObject section:
 	  
@@ -87,7 +87,7 @@ public class UpdateProfiles {
 		public static String path = "C:/salesforce_ant_44.0/work/adHocUpload/profiles/";
 		public static String valueForEditable = "false";
 		public static String valueForReadable = "false";
-		public static String fieldsToDisable =  
+		public static String fieldsforUpdate =  
 				",Account.Account_Status__c"+
 				",Account.PRN_Company_Id__c"+
 				",Account.PRN_Legacy_ID__c"+
@@ -165,7 +165,7 @@ public class UpdateProfiles {
 			for (int i = 0; i < nodes.getLength(); i++) {
 				Node currentNode = nodes.item(i);
 				String fullName = ((Element)currentNode).getTextContent();
-				if (fieldsToDisable.contains(","+fullName+",")) {
+				if (fieldsforUpdate.contains(","+fullName+",")) {
 					System.out.println( fullName );			
 		
 					NodeList childNodes = currentNode.getParentNode().getChildNodes();

@@ -41,6 +41,64 @@ public class LayoutAnalyser {
 	static Map fields = new TreeMap();
 	static Map layouts = new TreeMap();
 	static Map AllObjectfields = new TreeMap();
+	
+	public static String showFieldsOnly =  
+	",Account_Status__c"+
+	",PRN_Company_Id__c"+
+	",PRN_Legacy_ID__c"+
+	",PRN_Business_Unit__c"+
+	",Account_Type__c"+
+	",Global_Account__c"+
+	",TickerSymbol"+
+	",PO_PR_Newswire__c"+
+	",PRN_Sales_Team__c"+
+	",Industry"+
+	",PRN_Rate_Card__c"+
+	",PRN_Cost_Centre__c"+
+	",Payment_Terms__c"+
+	",VAT_Country__c"+
+	",UK_VAT_Country_Status__c"+
+	",PRN_Inv_Tax_Code__c"+
+	",PRN_Disclose_Client__c"+
+	",PRN_Tax_Point__c"+
+	",PRN_Subs_Holder__c"+
+	",PO_Required__c"+
+	",Pre_Payment_Method__c"+
+	",PRN_Monthly_Billing__c"+
+	",Invoicing_Period__c"+
+	",Credit_status__c"+
+	",Is_PRN__c"+
+	",PRN_Contact_Id__c"+
+	",Inactive__c"+
+	",PRN_Direct_User__c"+
+    ",Id"+
+    ",Name"+
+    ",ShippingStreet"+
+    ",ShippingState"+
+    ",ShippingCity"+
+    ",ShippingPostalCode"+
+    ",ShippingCountry"+
+    ",BillingStreet"+
+    ",BillingState"+
+    ",BillingCity"+
+    ",BillingPostalCode"+
+    ",BillingCountry"+
+    ",CurrencyIsoCode"+
+    ",Phone"+
+    ",Salutation"+
+    ",FirstName"+
+    ",LastName"+
+    ",MailingStreet"+
+    ",MailingCity"+
+    ",MailingState"+
+    ",MailingCountry"+
+    ",MailingPostalCode"+
+    ",Phone"+
+    ",MobilePhone"+
+    ",Email"+
+    ",Title"+
+    ",";	
+	
 		
     public static void 	writeToCsv(String folderName) throws IOException {
 		  FileWriter fw = new FileWriter(folderName+"\\result.csv");
@@ -57,20 +115,25 @@ public class LayoutAnalyser {
 		  //file content
 		  for(Object fieldLabel: AllObjectfields.keySet()) {
 			  String fieldApiName = (String)AllObjectfields.get(fieldLabel);
-			  fw.write( String.format("%s,%s,", fieldLabel, fieldApiName) );
-			  //counter
-			  Integer count = 0;
-			  for(Object layout: layouts.keySet()) {
-				    if (fieldsAndLayouts.containsKey(layout.toString()+"#"+fieldApiName)) {
-				    	count++;
-					} 
-			  }		  
-			  fw.write( count +"," );
-              //YES flag
-			  for(Object layout: layouts.keySet()) {
-			    	fw.write( ((fieldsAndLayouts.containsKey(layout.toString()+"#"+fieldApiName))?"YES,":",") );
-			  }	
-			  fw.write( "\n" );
+			  
+			  if (true) {
+			  //if (showFieldsOnly.contains(","+fieldApiName+",")) {
+			  
+				  fw.write( String.format("%s,%s,", fieldLabel, fieldApiName) );
+				  //counter
+				  Integer count = 0;
+				  for(Object layout: layouts.keySet()) {
+					    if (fieldsAndLayouts.containsKey(layout.toString()+"#"+fieldApiName)) {
+					    	count++;
+						} 
+				  }		  
+				  fw.write( count +"," );
+	              //YES flag
+				  for(Object layout: layouts.keySet()) {
+				    	fw.write( ((fieldsAndLayouts.containsKey(layout.toString()+"#"+fieldApiName))?"YES,":",") );
+				  }	
+				  fw.write( "\n" );
+			  }  
 		  }	
 		  fw.close();
     }
@@ -170,7 +233,7 @@ public class LayoutAnalyser {
 		System.out.println("* It analyzes page layouts, not visual force pages (so far).");
 		System.out.println("* It can be used for identification what region uses what fields and for identification what fields are not used at all.");
 		System.out.println("* Column C says the number of page layouts on which field is used. 0 mean the field is suspicious and should be prosecuted  rather than instant death sentence."); 
-		System.out.println("Version 2016.11.23     Author: Maciej Szymczak");
+		System.out.println("Version 2020.10.09     Author: Maciej Szymczak");
 		
 		if (args.length!=1) {
 			System.out.println("");
@@ -181,6 +244,7 @@ public class LayoutAnalyser {
 		String folderName = args[0];
 		readFilesFromFolder(new File(folderName));
 		writeToCsv(folderName);
+		System.out.println("Done!");
 	}
 
 }
