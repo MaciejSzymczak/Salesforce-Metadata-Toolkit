@@ -37,10 +37,10 @@ import org.xml.sax.SAXException;
 public class LayoutAnalyser {
 	
 	//Treemap is an implementation of the SortedMap interface. It presents its keys in sorted order.
-	static Map fieldsAndLayouts = new TreeMap();
-	static Map fields = new TreeMap();
-	static Map layouts = new TreeMap();
-	static Map AllObjectfields = new TreeMap();
+	static Map fieldsAndLayouts = new TreeMap<String, String>();
+	static Map fields = new TreeMap<String, String>();
+	static Map layouts = new TreeMap<String, String>();
+	static Map AllObjectfields = new TreeMap<String, String>();
 	
 	public static String showFieldsOnly =  
 	",Account_Status__c"+
