@@ -28,9 +28,8 @@ import org.xml.sax.SAXException;
 public class PageLayoutAssignment {
 
 	/*
-	 * This class generates 3 csv files:
+	 * This class generates 3 csv files shown in the folder SampleDataPageLayoutAssignment
 	 * 
-
 
 	 * How to use it 
 	 *  1. Download files. Here is an example package.xml 
@@ -126,9 +125,10 @@ public class PageLayoutAssignment {
 
 			System.out.println("Creating file: "+path+"PageLayoutUsage.csv");
 			FileWriter fw2 = new FileWriter(path+"PageLayoutUsage.csv");
-            fw2.write("ProfileCnt,LayoutName,UsedByProfiles\n");
+            fw2.write("ProfileCnt,ObjectName,LayoutName,UsedByProfiles\n");
 	        for(String key: layouts.keySet()){
-	            fw2.write(layoutsCnt.get(key) +","+ key +","+ layouts.get(key) + "\n");
+	        	String objectName = key.substring(0,key.indexOf("-"));
+	            fw2.write(layoutsCnt.get(key) +","+ objectName +","+ key +","+ layouts.get(key) + "\n");
 	        }			
 			fw2.flush();
 	        
