@@ -57,7 +57,7 @@ public class WhoHasAccessToObject {
 	* analyseXMLLayout
 	 * @throws XPathExpressionException 
 	*/
-	public static void analyseXML (String path, String fileName) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException {
+	public static void analyseXML (String path, String fileName, String sObjectName) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException {
 		//rows.put(fileName, "");
 		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -74,7 +74,7 @@ public class WhoHasAccessToObject {
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node currentNode = nodes.item(i);
 			String SObjectName = ((Element)currentNode).getTextContent();
-			if (SObjectName.equals("Historical_PRN_Credit_Memo__c")) {
+			if (SObjectName.equals(sObjectName)) {
 				String allowRead = "N/A";
 				String allowCreate = "N/A";
 				String allowDelete = "N/A";
@@ -105,18 +105,18 @@ public class WhoHasAccessToObject {
 	 * @throws SAXException 
 	 * @throws XPathExpressionException 
 	*/
-	public static void readFilesFromFolder(final File folder) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
+	public static void readFilesFromFolder(final File folder, String sObjectName) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory()) {
-	        	readFilesFromFolder(fileEntry);
+	        	readFilesFromFolder(fileEntry, sObjectName);
 	        } else {
 	            if (fileEntry.getName().endsWith(".profile")  ) {
 	            	System.out.println("profile:" + fileEntry.getName());
-	            	analyseXML(folder.getPath()+"\\", fileEntry.getName());
+	            	analyseXML(folder.getPath()+"\\", fileEntry.getName(), sObjectName);
 	            }	
 	            if (fileEntry.getName().endsWith(".permissionset")  ) {
 	            	System.out.println("permissionset:" + fileEntry.getName());
-	            	analyseXML(folder.getPath()+"\\", fileEntry.getName());
+	            	analyseXML(folder.getPath()+"\\", fileEntry.getName(), sObjectName);
 	            }	
 	        }
 	    }
@@ -124,13 +124,15 @@ public class WhoHasAccessToObject {
 	
 	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
 
-		if (args.length!=1) {
-			System.out.println("");
-			System.out.println("**** usage: java -Dfile.encoding=UTF8 -jar jarname.jar <source folder>");
+		if (args.length!=2) {
+			System.out.println("@author Maciej Szymczak");
+			System.out.println("**** usage: java -Dfile.encoding=UTF8 -jar jarname.jar <source folder> <objectname>");
+			System.out.println("**** example: java -Dfile.encoding=UTF8 -jar jarname.jar C:\\salesforce_ant_44.0\\work\\adHocDownload\\profiles Historical_PRN_Credit_Memo__c");
 			System.exit(-1);
 		}
 		String folderName = args[0];
-		readFilesFromFolder(new File(folderName));
+		String sObjectName = args[1];
+		readFilesFromFolder(new File(folderName), sObjectName);
 		writeToCsv(folderName);
 		System.out.println("Done!");
 	}
