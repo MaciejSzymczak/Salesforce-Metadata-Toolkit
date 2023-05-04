@@ -18,5 +18,5 @@ It analyzes page layouts, not visual force pages (so far).
 It can be used for identification what region uses what fields and for identification what fields are not used at all.
 Column C says the number of page layouts on which field is used. 0 mean the field is suspicious and should be prosecuted  rather than instant death sentence. 
 
-@param  Folder name with <pageLayuouts>.layout and <objectdefinition>.object
+@param  Folder name with <pageLayuouts>.layout and <objectdefinition>.object.
 @return result.csv
