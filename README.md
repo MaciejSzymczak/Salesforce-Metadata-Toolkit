@@ -5,6 +5,7 @@
 * UpdateProfiles - updates a list of Salesforce profiles: removes or grants access to certain fields.
 * PageLayoutAssignment - exports the Salesforce matrix: page layout assignments
 * SalesforceDependencies - perform full search of apex classes (you can provide the list of keywords like custom objects, profiles etc.)
+* ControllingPickListsUpdate - manipulates complex controlling picklist dependencies (too complex to make it manually)
 
 @author Maciej Szymczak
 @version 2023.05.04

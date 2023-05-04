@@ -1,7 +1,2 @@
-/LayoutAnalyser.class
-/PageLayoutAssignment.class
-/SalesforceDependencies.class
-/SampleDataLayoutAnalyser/
-/SampleDataPageLayoutAssignment/
-/UpdateProfiles.class
-/WhoHasAccessToObject.class
+/ControllingPickListsUpdate.class
+/MyException.class
