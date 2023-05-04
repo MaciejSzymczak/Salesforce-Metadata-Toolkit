@@ -6,7 +6,8 @@
 * PageLayoutAssignment - exports the Salesforce matrix: page layout assignments
 * SalesforceDependencies - perform full search of apex classes (you can provide the list of keywords like custom objects, profiles etc.)
 
-* @author Maciej Szymczak
+@author Maciej Szymczak
+@version 2023.05.04
 
 # More about LayoutAnalyzer
 
@@ -17,6 +18,5 @@ It analyzes page layouts, not visual force pages (so far).
 It can be used for identification what region uses what fields and for identification what fields are not used at all.
 Column C says the number of page layouts on which field is used. 0 mean the field is suspicious and should be prosecuted  rather than instant death sentence. 
 
-@version 2023.05.04
 @param  Folder name with <pageLayuouts>.layout and <objectdefinition>.object
 @return result.csv
