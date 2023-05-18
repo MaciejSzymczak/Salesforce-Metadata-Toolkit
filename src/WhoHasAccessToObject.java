@@ -187,6 +187,7 @@ public class WhoHasAccessToObject {
 
 		XPathFactory xpf = XPathFactory.newInstance();
 		XPath xpath = xpf.newXPath();
+		//fine page for testing xpath: http://xpather.com/
 		XPathExpression expression = xpath.compile( "//objectPermissions[*]/object" );
 		
 		NodeList nodes = (NodeList) expression.evaluate(doc, XPathConstants.NODESET);

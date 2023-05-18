@@ -25,8 +25,11 @@
 public class UpdateProfiles {
 
 	/*
-	 * This class updates a list of Salesforce profiles: removes or grants access to certain fields.
+	 * This class updates a Salesforce profiles: removes or grants access to specified fields.
 	 * The class updates all xml files in the folder. It sets false/true for the list of provided fields
+	 * 
+	 * @author Maciej Szymczak
+	 * @version 2023.05.18
 
 	<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
 	    <custom>true</custom>
@@ -48,25 +51,27 @@ public class UpdateProfiles {
 
 
 	 * How to use it 
-	 *  1. Download profiles. Here is an example package.xml (remember to add CustomObject section so that fields are included in the profile files. Yes, custom objects also can be added to CustomObjects):
+	 *  1. Download profiles. Here is an example package.xml
+	 *     remember to add CustomObject section so that fields are included in the profile files. Yes, standard objects also can be added to CustomObjects.
 	 *  
 			<?xml version="1.0" encoding="UTF-8"?>
 			<Package xmlns="http://soap.sforce.com/2006/04/metadata">
 			    <types>
 			        <members>Account</members>
 			        <members>Contact</members>
+			        <members>YourCustomObject__c</members>
 			        <name>CustomObject</name>
 			    </types>
 			    <types>
 			        <members>*</members>
 			        <name>Profile</name>
 			    </types>
-			    <version>48.0</version>
+			    <version>56.0</version>
 			</Package>
 
-	    2. Set 4 entry parameters see fieldsforUpdate, valueForEditable, and so on below
+	    2. Set the parameters: path, valueForEditable, valueForReadable, fieldsforUpdate
 	    3. Run this class 
-        4. Upload the updated profiles. Package.xml does not need the CustomObject section:
+        4. Upload the updated profiles. Skip CustomObject section in package.xml.
 	  
 			<?xml version="1.0" encoding="UTF-8"?>
 			<Package xmlns="http://soap.sforce.com/2006/04/metadata">
@@ -78,44 +83,41 @@ public class UpdateProfiles {
 			        <members>FI System Administrator.profile</members>
 			        <name>Profile</name>
 			    </types>
-			    <version>48.0</version>
+			    <version>56.0</version>
 			</Package>
 	 
 	 * 
 	 * */	
 		
-		public static String path = "C:/salesforce_ant_44.0/work/adHocUpload/profiles/";
+		public static String path = "C:\\salesforce_ant_44.0\\work\\adHocDownload\\profiles\\";
 		public static String valueForEditable = "false";
-		public static String valueForReadable = "false";
+		public static String valueForReadable = "true";
 		public static String fieldsforUpdate =  
-				",Account.Account_Status__c"+
-				",Account.PRN_Company_Id__c"+
-				",Account.PRN_Legacy_ID__c"+
-				",Account.PRN_Business_Unit__c"+
-				",Account.Account_Type__c"+
-				",Account.Global_Account__c"+
-				",Account.TickerSymbol"+
-				",Account.PO_PR_Newswire__c"+
-				",Account.PRN_Sales_Team__c"+
-				",Account.Industry"+
-				",Account.PRN_Rate_Card__c"+
-				",Account.PRN_Cost_Centre__c"+
-				",Account.Payment_Terms__c"+
-				",Account.VAT_Country__c"+
-				",Account.UK_VAT_Country_Status__c"+
-				",Account.PRN_Inv_Tax_Code__c"+
-				",Account.PRN_Disclose_Client__c"+
-				",Account.PRN_Tax_Point__c"+
-				",Account.PRN_Subs_Holder__c"+
-				",Account.PO_Required__c"+
-				",Account.Pre_Payment_Method__c"+
-				",Account.PRN_Monthly_Billing__c"+
-				",Account.Invoicing_Period__c"+
-				",Account.Credit_status__c"+
-				",Account.Is_PRN__c"+
-				",Contact.PRN_Contact_Id__c"+
-				",Contact.Inactive__c"+
-				",Contact.PRN_Direct_User__c"+
+				",Account.SW_New_Biz_Propensity_Score__c"       +
+				",Account.SW_G2_Intent_Last_30_Days__c"         +
+				",Account.SW_Bombora_Intent_Last_30_Days__c"    +
+				",Account.Email_Click_Count_Last_30_Days__c"    +
+				",Account.SW_Email_Click_Count_Last_30_Days__c" +
+				",Account.Form_Submit_Count_Last_30_Days__c"    +
+				",Account.SW_Form_Submit_Count_Last_30_Days__c" +
+				",Account.WRK_PRN_Competitor_Used__c"           +
+				",Contact.SW_New_Biz_Propensity_Score__c"       +
+				",Contact.SW_G2_Intent_Last_30_Days__c"         +
+				",Contact.SW_Bombora_Intent_Last_30_Days__c"    +
+				",Contact.Email_Click_Count_Last_30_Days__c"    +
+				",Contact.SW_Email_Click_Count_Last_30_Days__c" +
+				",Contact.Form_Submit_Count_Last_30_Days__c"    +
+				",Contact.SW_Form_Submit_Count_Last_30_Days__c" +
+				",Contact.AIQ_Update_Date_Trigger__c"           +
+				",Contact.WRK_PRN_Competitor_Used__c"           +
+				",Lead.WRK_PRN_Competitor_Used__c"           +
+				",Lead.SW_New_Biz_Propensity_Score__c"          +
+				",Lead.SW_G2_Intent_Last_30_Days__c"            +
+				",Lead.SW_Bombora_Intent_Last_30_Days__c"       +
+				",Lead.Email_Click_Count_Last_30_Days__c"       +
+				",Lead.SW_Email_Click_Count_Last_30_Days__c"    +
+				",Lead.Form_Submit_Count_Last_30_Days__c"       +
+				",Lead.SW_Form_Submit_Count_Last_30_Days__c"    +
 				",";
 		
 		
@@ -184,14 +186,12 @@ public class UpdateProfiles {
 				}  
 				
 			}
-			saveChanges(doc, path+fileName);
-			
+			saveChanges(doc, path+fileName);			
 		}
 		
 		public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException {
 			readFilesFromFolder(path);
 			System.out.println("Done!");
 		}
-
 
 }
